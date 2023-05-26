@@ -115,24 +115,6 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 ports   = ["http"]
 
                 extra_hosts = ["sonar.db.internal:$\u007BNOMAD_IP_http\u007D"]
-                
-                mount {
-                    type = "volume"
-                    target = "/opt/sonarqube/data/"
-                    source = "sonarqube_data"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 1
-                            }
-                        }
-                    }
-                }             
 
                 # Mise en place des plugins                  
                 mount {
