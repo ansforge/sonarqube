@@ -37,7 +37,7 @@ app "forge/sonarqube-app" {
 
 variable "datacenter" {
     type    = string
-    default = "test"
+    default = "henix_docker_platform_pfcpx"
 }
 
 variable "image" {
