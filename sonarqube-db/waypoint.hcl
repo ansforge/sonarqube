@@ -18,7 +18,7 @@ app "forge/sonarqube-db" {
         use "docker-ref" {
             image = var.image
             tag   = var.tag
-            disable_entrypoint = true
+            # disable_entrypoint = false
         }
     }
   
