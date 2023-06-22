@@ -15,7 +15,7 @@ runner {
 app "forge/sonarqube-db" {
 
     build {
-        use "docker-pull" {
+        use "docker-ref" {
             image = var.image
             tag   = var.tag
             disable_entrypoint = true
