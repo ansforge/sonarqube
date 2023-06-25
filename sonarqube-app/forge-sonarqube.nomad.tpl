@@ -1,7 +1,8 @@
-job "forge-sonarqube" {
+job "${nomad_namespace}-forge-sonarqube" {
     datacenters = ["${datacenter}"]
+    namespace = "${nomad_namespace}"
     type = "service"
-
+    
     vault {
         policies = ["forge"]
         change_mode = "restart"
@@ -24,7 +25,7 @@ job "forge-sonarqube" {
         }
 
         network {
-            port "http" {
+            port "namespace = "http" {
                 to = 9000
             }
         }
@@ -91,7 +92,8 @@ SONAR_JDBC_USERNAME={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_userna
 SONAR_JDBC_PASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_password }}{{ end }}
 SONAR_JDBC_URL=jdbc:postgresql://sonar.db.internal:5432/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
 # LDAP Configuration
-LDAP_URL=ldap://{{ range service "ldap-forge" }}{{ .Address }}{{ end }}
+# LDAP_URL=ldap://{{ range service "ldap-forge" }}{{ .Address }}{{ end }}
+LDAP_URL=ldap://{{ range service "openldap-forge" }}{{ .Address }}{{ end }}
 LDAP_BINDPASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.ldap_password }}{{ end }}
 SONAR_SECURITY_REALM=LDAP
 SONAR_SECURITY_SAVEPASSWORD=true
@@ -204,7 +206,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-${qual_fqdn}/"]
+                tags = ["urlprefix-${nomad_namespace}-${qual_fqdn}/"]
                 port = "http"
                 check {
                     name     = "alive"

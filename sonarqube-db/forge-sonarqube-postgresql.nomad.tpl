@@ -1,10 +1,13 @@
- job "forge-sonarqube-postgresql" {
+ job "${nomad_namespace}-forge-sonarqube-postgresql" {
     datacenters = ["${datacenter}"]
+    namespace = "${nomad_namespace}"
     type = "service"
+
     vault {
         policies = ["forge"]
         change_mode = "restart"
     }
+    
     group "sonarqube-postgresql" {
         count ="1"
         
@@ -44,7 +47,7 @@ POSTGRES_PASSWORD={{ .Data.data.psql_password }}
             config {
                 image   = "${image}:${tag}"
                 ports   = ["postgres"]
-                volumes = ["name=forge-sonarqube-db,io_priority=high,size=25,repl=2:/var/lib/postgresql/data"]
+                volumes = ["name=${nomad_namespace}-forge-sonarqube-db,io_priority=high,size=25,repl=2:/var/lib/postgresql/data"]
                 volume_driver = "pxd"
             }
             

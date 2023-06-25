@@ -4,8 +4,9 @@ labels = { "domaine" = "forge" }
 
 runner {
     enabled = true
+    profile = "${workspace.name}"
     data_source "git" {
-        url  = "https://github.com/ansforge/sonarqube.git"
+        url  = "https://rhodecode.proxy.dev.forge.esante.gouv.fr/SandBox/QM/FORGE/Sonarqube.git"
         ref  = "var.datacenter"
         path = "sonarqube-app"
         ignore_changes_outside_path = true
@@ -15,10 +16,10 @@ runner {
 app "forge/sonarqube-app" {
 
     build {
-        use "docker-pull" {
+        use "docker-ref" {
             image = var.image
             tag   = var.tag
-            disable_entrypoint = true
+            # disable_entrypoint = false
         }
     }
   
@@ -35,9 +36,10 @@ app "forge/sonarqube-app" {
     }
 }
 
-variable "datacenter" {
-    type    = string
+variable datacenter {
+    type = string
     default = "henix_docker_platform_pfcpx"
+    env = ["NOMAD_DATACENTER"]
 }
 
 variable "image" {
@@ -52,10 +54,10 @@ variable "tag" {
 
 variable "qual_fqdn" {
     type    = string
-    default = "qual.forge.asipsante.fr"
+    default = "qual.forge.henix.asipsante.fr"
 }
 
 variable "repo_url" {
     type    = string
-    default = "http://repo.proxy-prod-forge.asip.hst.fluxus.net"
+    default = "http://repo.proxy-dev-forge.asip.hst.fluxus.net"
 }
