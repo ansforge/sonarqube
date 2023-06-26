@@ -25,7 +25,7 @@ job "${nomad_namespace}-forge-sonarqube" {
         }
 
         network {
-            port "namespace = "http" {
+            port "http" {
                 to = 9000
             }
         }
@@ -121,7 +121,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 mount {
                     type = "volume"
                     target = "/opt/sonarqube/data/"
-                    source = "sonarqube_data"
+                    source = "${nomad_namespace}-sonarqube_data"
                     readonly = false
                     volume_options {
                         no_copy = false

@@ -1,4 +1,4 @@
-project = "${workspace.name}-forge/sonarqube"
+project = "forge/sonarqube-db"
 
 labels = { "domaine" = "forge" }
 
@@ -8,12 +8,12 @@ runner {
     data_source "git" {
         url  = "https://rhodecode.proxy.dev.forge.esante.gouv.fr/SandBox/QM/FORGE/Sonarqube.git"
         ref  = "var.datacenter"
-        path = "sonarqube-app"
+        path = "sonarqube-db"
         ignore_changes_outside_path = true
     }
 }
 
-app "forge/sonarqube-app" {
+app "forge/sonarqube-db" {
 
     build {
         use "docker-ref" {
@@ -25,12 +25,10 @@ app "forge/sonarqube-app" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/forge-sonarqube.nomad.tpl", {
-                image   = var.image
-                tag     = var.tag
-                datacenter = var.datacenter
-                qual_fqdn = var.qual_fqdn
-                repo_url = var.repo_url
+            jobspec = templatefile("${path.app}/forge-sonarqube-postgresql.nomad.tpl", {
+            image   = var.image
+            tag     = var.tag
+            datacenter = var.datacenter
             })
         }
     }
@@ -44,20 +42,10 @@ variable datacenter {
 
 variable "image" {
     type    = string
-    default = "sonarqube"
+    default = "postgres"
 }
 
 variable "tag" {
     type    = string
-    default = "9.9-developer"
-}
-
-variable "qual_fqdn" {
-    type    = string
-    default = "qual.forge.henix.asipsante.fr"
-}
-
-variable "repo_url" {
-    type    = string
-    default = "http://repo.proxy-dev-forge.asip.hst.fluxus.net"
+    default = "15.2"
 }
