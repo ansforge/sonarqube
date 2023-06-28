@@ -1,4 +1,4 @@
-project = "${workspace.name}-forge-sonarqube"
+project = "odrtest-forge-sonarqube"
 
 labels = { "domaine" = "forge" }
 

@@ -59,7 +59,7 @@ POSTGRES_PASSWORD={{ .Data.data.psql_password }}
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 port = "postgres"
-                tags = ["urlprefix-:5432 proto=tcp"]
+                # tags = ["urlprefix-:5432 proto=tcp"]
                 check {
                     name     = "alive"
                     type     = "tcp"

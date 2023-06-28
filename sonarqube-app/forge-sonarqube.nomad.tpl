@@ -90,7 +90,8 @@ SONAR_SECRETKEYPATH=/opt/sonarqube/.sonar/sonar-secret.txt
 # JDBC Configuration
 SONAR_JDBC_USERNAME={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_username }}{{ end }}
 SONAR_JDBC_PASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_password }}{{ end }}
-SONAR_JDBC_URL=jdbc:postgresql://${nomad_namespace}-sonar.db.internal:5432/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
+# SONAR_JDBC_URL=jdbc:postgresql://${nomad_namespace}-sonar.db.internal:5432/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
+SONAR_JDBC_URL=jdbc:postgresql://{{ range service "${nomad_namespace}-forge-sonarqube-postgresql" }}{{.Address}}:{{.Port}}{{ end }}/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
 # LDAP Configuration
 # LDAP_URL=ldap://{{ range service "ldap-forge" }}{{ .Address }}{{ end }}
 LDAP_URL=ldap://{{ range service "openldap-forge" }}{{ .Address }}{{ end }}
@@ -116,7 +117,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 image   = "${image}:${tag}"
                 ports   = ["http"]
 
-                extra_hosts = ["${nomad_namespace}-sonar.db.internal:$${NOMAD_IP_http}"]
+                # extra_hosts = ["${nomad_namespace}-sonar.db.internal:$${NOMAD_IP_http}"]
                 
                 mount {
                     type = "volume"
