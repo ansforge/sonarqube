@@ -31,6 +31,10 @@ job "forge-sonarqube" {
 
         task "sonarqube" {
             driver = "docker"
+
+            # log-shipper
+            leader = true 
+
             # Ajout de plugins
             artifact {
                 source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
@@ -215,7 +219,37 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     port     = "http"
                 }
             }
+        }
 
-        } 
+        # log-shipper
+        task "log-shipper" {
+            driver = "docker"
+            restart {
+                    interval = "3m"
+                    attempts = 5
+                    delay    = "15s"
+                    mode     = "delay"
+            }
+            meta {
+                INSTANCE = "$\u007BNOMAD_ALLOC_NAME\u007D"
+            }
+            template {
+                data = <<EOH
+REDIS_HOSTS = {{ range service "PileELK-redis" }}{{ .Address }}:{{ .Port }}{{ end }}
+PILE_ELK_APPLICATION = SONARQUBE 
+EOH
+                destination = "local/file.env"
+                change_mode = "restart"
+                env = true
+            }
+            config {
+                image = "ans/nomad-filebeat:8.2.3-2.0"
+            }
+            resources {
+                cpu    = 100
+                memory = 150
+            }
+        } #end log-shipper 
+
     }
 }
