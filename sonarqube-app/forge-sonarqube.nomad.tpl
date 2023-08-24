@@ -95,7 +95,7 @@ SONAR_JDBC_USERNAME={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_userna
 SONAR_JDBC_PASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_password }}{{ end }}
 SONAR_JDBC_URL=jdbc:postgresql://sonar.db.internal:5432/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
 # LDAP Configuration
-LDAP_URL=ldap://{{ range service "ldap-forge" }}{{ .Address }}{{ end }}
+LDAP_URL=ldap://{{ range service "openldap-forge" }}{{ .Address }}{{ end }}
 LDAP_BINDPASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.ldap_password }}{{ end }}
 SONAR_SECURITY_REALM=LDAP
 SONAR_SECURITY_SAVEPASSWORD=true
@@ -236,7 +236,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
             template {
                 data = <<EOH
 REDIS_HOSTS = {{ range service "PileELK-redis" }}{{ .Address }}:{{ .Port }}{{ end }}
-PILE_ELK_APPLICATION = SONARQUBE 
+PILE_ELK_APPLICATION = SONARQUBE
 EOH
                 destination = "local/file.env"
                 change_mode = "restart"
