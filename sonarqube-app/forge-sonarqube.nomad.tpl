@@ -39,40 +39,40 @@ job "forge-sonarqube" {
             artifact {
                 source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
                 options {
-		            archive = false
-  		        }
-		    }
+                    archive = false
+                }
+            }
             artifact {
                 source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/checkstyle-sonar-plugin-10.8.1.jar"
                 options {
-		            archive = false
-  		        }
-		    }
+                    archive = false
+                }
+            }
             artifact {
                 source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-findbugs-plugin-4.2.3.jar"
                 options {
-		            archive = false
-  		        }
-		    }
+                    archive = false
+                }
+            }
             artifact {
-	    	    source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
                 options {
-		            archive = false
-  		        }
-		    }
+                    archive = false
+                }
+            }
             artifact {
-	    	    source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
                 options {
-		            archive = false
-  		        }
-		    }
-            #Ajout du Certificat
+                    archive = false
+                }
+            }
+            # Trustore java
             artifact { 
-	    	    source = "${repo_url}/artifactory/asip-ac/truststore/cacerts"
+                source = "${repo_url}/artifactory/asip-ac/truststore/cacerts"
                 options {
-		            archive = false
-  		        }
-		    }
+                    archive = false
+                }
+            }
 
             template {
                 data = <<EOH
@@ -96,17 +96,17 @@ SONAR_JDBC_PASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.psql_passwo
 SONAR_JDBC_URL=jdbc:postgresql://sonar.db.internal:5432/sonar?currentSchema={{ with secret "forge/sonarqube" }}{{ .Data.data.db_name }}{{ end }}
 # LDAP Configuration
 LDAP_URL=ldap://{{ range service "openldap-forge" }}{{ .Address }}{{ end }}
-LDAP_BINDPASSWORD={{ with secret "forge/sonarqube" }}{{ .Data.data.ldap_password }}{{ end }}
+LDAP_BINDPASSWORD={{ with secret "forge/openldap" }}{{ .Data.data.admin_password }}{{ end }}
 SONAR_SECURITY_REALM=LDAP
 SONAR_SECURITY_SAVEPASSWORD=true
-LDAP_BINDDN=cn=Manager,dc=asipsante,dc=fr
+LDAP_BINDDN=cn=Manager,{{ with secret "forge/openldap" }}{{ .Data.data.ldap_root }}{{ end }}
 # User Configuration
-LDAP_USER_BASEDN=ou=People,dc=asipsante,dc=fr
+LDAP_USER_BASEDN=ou=People,{{ with secret "forge/openldap" }}{{ .Data.data.ldap_root }}{{ end }}
 LDAP_USER_REQUEST=(&(objectClass=inetOrgPerson)(uid={login}))
 LDAP_USER_REALNAMEATTRIBUTE=cn
 LDAP_USER_EMAILATTRIBUTE=mail
 # Group Configuration
-LDAP_GROUP_BASEDN=ou=group,dc=asipsante,dc=fr
+LDAP_GROUP_BASEDN=ou=group,{{ with secret "forge/openldap" }}{{ .Data.data.ldap_root }}{{ end }}
 LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 EOH
                 destination = "secrets/file.env"
@@ -225,10 +225,10 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         task "log-shipper" {
             driver = "docker"
             restart {
-                    interval = "3m"
-                    attempts = 5
-                    delay    = "15s"
-                    mode     = "delay"
+                interval = "3m"
+                attempts = 5
+                delay    = "15s"
+                mode     = "delay"
             }
             meta {
                 INSTANCE = "$\u007BNOMAD_ALLOC_NAME\u007D"
