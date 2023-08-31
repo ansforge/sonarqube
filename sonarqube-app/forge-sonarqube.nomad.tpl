@@ -10,14 +10,13 @@ job "forge-sonarqube" {
     group "sonarqube" {
         count ="1"
 
-
         restart {
             attempts = 3
             delay = "60s"
             interval = "1h"
             mode = "fail"
         }
-        
+
         constraint {
             attribute = "$\u007Bnode.class\u007D"
             value     = "data"
@@ -119,7 +118,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 ports   = ["http"]
 
                 extra_hosts = ["sonar.db.internal:$\u007BNOMAD_IP_http\u007D"]
-                
+
                 mount {
                     type = "volume"
                     target = "/opt/sonarqube/data/"
@@ -136,9 +135,9 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                             }
                         }
                     }
-                }             
+                }
 
-                # Mise en place des plugins                  
+                # Mise en place des plugins
                 mount {
                     type = "bind"
                     target = "/opt/sonarqube/extensions/plugins/sonar-dependency-check-plugin-3.0.1.jar"
@@ -154,7 +153,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     bind_options {
                         propagation = "rshared"
                     }
-                }    
+                }
                 mount {
                     type = "bind"
                     target = "/opt/sonarqube/extensions/plugins/sonar-findbugs-plugin-4.2.3.jar"
@@ -162,7 +161,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     bind_options {
                         propagation = "rshared"
                     }
-                } 
+                }
                 mount {
                     type = "bind"
                     target = "/opt/sonarqube/extensions/plugins/sonar-groovy-plugin-1.8.jar"
@@ -178,8 +177,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     bind_options {
                         propagation = "rshared"
                     }
-                }             
-                # Certificat    
+                }
+                # Surcharge du trustore java
                 mount {
                     type = "bind"
                     target = "/opt/java/openjdk/lib/security/cacerts"
@@ -188,8 +187,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     bind_options {
                         propagation = "rshared"
                     }
-                } 
-                # token    
+                }
+                # token sonar
                 mount {
                     type = "bind"
                     target = "/opt/sonarqube/.sonar/sonar-secret.txt"
@@ -198,14 +197,14 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                     bind_options {
                         propagation = "rshared"
                     }
-                } 
+                }
             }
 
             resources {
                 cpu    = 600
                 memory = 6144
             }
-            
+
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-${qual_fqdn}/"]
@@ -220,7 +219,6 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 }
             }
         }
-
         # log-shipper
         task "log-shipper" {
             driver = "docker"
@@ -250,6 +248,5 @@ EOH
                 memory = 150
             }
         } #end log-shipper 
-
     }
 }

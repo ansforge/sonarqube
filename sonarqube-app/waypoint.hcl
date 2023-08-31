@@ -21,7 +21,7 @@ app "forge/sonarqube-app" {
             disable_entrypoint = true
         }
     }
-  
+
     deploy{
         use "nomad-jobspec" {
             jobspec = templatefile("${path.app}/forge-sonarqube.nomad.tpl", {
