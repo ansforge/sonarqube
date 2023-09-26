@@ -24,7 +24,7 @@ echo "Démarrage du script de sauvegarde de Sonarcube"
 DATE=$(date +"%Y%m%d")
 
 # Dossier où sauvegarder les backups
-BACKUP_DIR="/var/BACKUP/SONARQUBE_BDD"
+BACKUP_DIR="/var/backup/SONARQUBE_BDD"
 
 # Commande NOMAD
 #NOMAD=/usr/local/bin/nomad
