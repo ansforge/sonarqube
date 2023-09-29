@@ -4,7 +4,7 @@ echo "Démarrage du script de sauvegarde de Sonarcube"
 # Nom du script     : sonarqube_BDD_backup.sh
 # Auteur            : 
 # Date de Création  : 09/05/2023
-# Version           : 0.0.1
+# Version           : 0.0.2
 # Descritpion       : Script permettant la sauvegarde de la BDD de sonarqube
 #
 # Historique des mises à jour :
@@ -12,6 +12,8 @@ echo "Démarrage du script de sauvegarde de Sonarcube"
 #  Version  |   Date   |   Auteur     |  Description
 #-----------+--------+-------------+------------------------------------------------------
 #  0.0.1    | 09/05/23 | S.IBNHARRADA     | Initialisation du script
+#-----------+--------+-------------+------------------------------------------------------
+#  0.0.2    | 21/09/23 | Y.ETRILLARD      | Ajout -task dans la commande nomad exec
 #-----------+--------+-------------+------------------------------------------------------
 #
 ###############################################################################################
@@ -41,7 +43,7 @@ mkdir -p $BACKUP_DIR/$DATE
 
 # Dump sonarqube bdd
 echo "starting Sonarqube dump..."
-$NOMAD exec -job forge-sonarqube-postgresql  pg_dump -F c --dbname=postgresql://sonar@localhost/sonar > $BACKUP_DIR/$DATE/$DUMP_FILENAME
+$NOMAD exec -task postgres -job forge-sonarqube-postgresql  pg_dump -F c --dbname=postgresql://sonar@localhost/sonar > $BACKUP_DIR/$DATE/$DUMP_FILENAME
 
 DUMP_RESULT=$?
 if [ $DUMP_RESULT -gt 0 ]
