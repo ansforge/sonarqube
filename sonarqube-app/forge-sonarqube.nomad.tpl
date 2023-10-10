@@ -53,18 +53,18 @@ job "forge-sonarqube" {
             #         archive = false
             #     }
             # }
-            # artifact {
-            #     source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
-            #     options {
-            #         archive = false
-            #     }
-            # }
-            # artifact {
-            #     source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
-            #     options {
-            #         archive = false
-            #     }
-            # }
+            artifact {
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
+                options {
+                    archive = false
+                }
+            }
+            artifact {
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
+                options {
+                    archive = false
+                }
+            }
             # Trustore java
             artifact { 
                 source = "${repo_url}/artifactory/asip-ac/truststore/cacerts"
@@ -162,22 +162,22 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 #         propagation = "rshared"
                 #     }
                 # }
-                # mount {
-                #     type = "bind"
-                #     target = "/opt/sonarqube/extensions/plugins/sonar-groovy-plugin-1.8.jar"
-                #     source = "local/sonar-groovy-plugin-1.8.jar"
-                #     bind_options {
-                #         propagation = "rshared"
-                #     }
-                # } 
-                # mount {
-                #     type = "bind"
-                #     target = "/opt/sonarqube/extensions/plugins/sonar-pmd-plugin-3.4.0.jar"
-                #     source = "local/sonar-pmd-plugin-3.4.0.jar"
-                #     bind_options {
-                #         propagation = "rshared"
-                #     }
-                # }
+                mount {
+                    type = "bind"
+                    target = "/opt/sonarqube/extensions/plugins/sonar-groovy-plugin-1.8.jar"
+                    source = "local/sonar-groovy-plugin-1.8.jar"
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                } 
+                mount {
+                    type = "bind"
+                    target = "/opt/sonarqube/extensions/plugins/sonar-pmd-plugin-3.4.0.jar"
+                    source = "local/sonar-pmd-plugin-3.4.0.jar"
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
                 # Surcharge du trustore java
                 mount {
                     type = "bind"
