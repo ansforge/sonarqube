@@ -35,24 +35,24 @@ job "forge-sonarqube" {
             leader = true 
 
             # Ajout de plugins
-            # artifact {
-            #     source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
-            #     options {
-            #         archive = false
-            #     }
-            # }
-            # artifact {
-            #     source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/checkstyle-sonar-plugin-10.8.1.jar"
-            #     options {
-            #         archive = false
-            #     }
-            # }
-            # artifact {
-            #     source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-findbugs-plugin-4.2.3.jar"
-            #     options {
-            #         archive = false
-            #     }
-            # }
+            artifact {
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
+                options {
+                    archive = false
+                }
+            }
+            artifact {
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/checkstyle-sonar-plugin-10.8.1.jar"
+                options {
+                    archive = false
+                }
+            }
+            artifact {
+                source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-findbugs-plugin-4.2.3.jar"
+                options {
+                    archive = false
+                }
+            }
             artifact {
                 source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
                 options {
@@ -138,30 +138,30 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 }
 
                 # Mise en place des plugins
-                # mount {
-                #     type = "bind"
-                #     target = "/opt/sonarqube/extensions/plugins/sonar-dependency-check-plugin-3.0.1.jar"
-                #     source = "local/sonar-dependency-check-plugin-3.0.1.jar"
-                #     bind_options {
-                #         propagation = "rshared"
-                #     }
-                # } 
-                # mount {
-                #     type = "bind"
-                #     target = "/opt/sonarqube/extensions/plugins/checkstyle-sonar-plugin-10.8.1.jar"
-                #     source = "local/checkstyle-sonar-plugin-10.8.1.jar"
-                #     bind_options {
-                #         propagation = "rshared"
-                #     }
-                # }
-                # mount {
-                #     type = "bind"
-                #     target = "/opt/sonarqube/extensions/plugins/sonar-findbugs-plugin-4.2.3.jar"
-                #     source = "local/sonar-findbugs-plugin-4.2.3.jar"
-                #     bind_options {
-                #         propagation = "rshared"
-                #     }
-                # }
+                mount {
+                    type = "bind"
+                    target = "/opt/sonarqube/extensions/plugins/sonar-dependency-check-plugin-3.0.1.jar"
+                    source = "local/sonar-dependency-check-plugin-3.0.1.jar"
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                } 
+                mount {
+                    type = "bind"
+                    target = "/opt/sonarqube/extensions/plugins/checkstyle-sonar-plugin-10.8.1.jar"
+                    source = "local/checkstyle-sonar-plugin-10.8.1.jar"
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+                mount {
+                    type = "bind"
+                    target = "/opt/sonarqube/extensions/plugins/sonar-findbugs-plugin-4.2.3.jar"
+                    source = "local/sonar-findbugs-plugin-4.2.3.jar"
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
                 mount {
                     type = "bind"
                     target = "/opt/sonarqube/extensions/plugins/sonar-groovy-plugin-1.8.jar"
