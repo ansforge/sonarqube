@@ -208,6 +208,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-${qual_fqdn}/"]
+                tags = ["urlprefix-${qual_fqdn_vip}/"]
                 port = "http"
                 check {
                     name     = "alive"
