@@ -29,6 +29,7 @@ app "forge/sonarqube-app" {
             tag     = var.tag
             datacenter = var.datacenter
             qual_fqdn = var.qual_fqdn
+			qual_fqdn_vip = var.qual_fqdn_vip
             repo_url = var.repo_url
             })
         }
@@ -53,6 +54,11 @@ variable "tag" {
 variable "qual_fqdn" {
     type    = string
     default = "qual.forge.asipsante.fr"
+}
+
+variable "qual_fqdn_vip" {
+    type    = string
+    default = "qual.forge.vip.asipsante.fr"
 }
 
 variable "repo_url" {
