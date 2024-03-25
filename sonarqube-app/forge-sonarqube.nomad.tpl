@@ -172,7 +172,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 } 
                 mount {
                     type = "bind"
-                    target = "/opt/sonarqube/extensions/plugins/sonar-pmd-plugin-3.4.0.jar"
+                    target = "/
+                    "
                     source = "local/sonar-pmd-plugin-3.4.0.jar"
                     bind_options {
                         propagation = "rshared"
