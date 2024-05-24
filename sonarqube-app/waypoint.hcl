@@ -29,7 +29,7 @@ app "forge/sonarqube-app" {
             tag     = var.tag
             datacenter = var.datacenter
             qual_fqdn = var.qual_fqdn
-			qual_fqdn_vip = var.qual_fqdn_vip
+            qual_fqdn_vip = var.qual_fqdn_vip
             repo_url = var.repo_url
             })
         }
