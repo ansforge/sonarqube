@@ -209,7 +209,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = [
                         "urlprefix-${qual_fqdn}/",
-                        "urlprefix-${qual_fqdn_vip}/"
+                        "urlprefix-${qual_fqdn_vip}/",
+                        "urlprefix-qual.internal/"
                         ]
                 port = "http"
                 check {
