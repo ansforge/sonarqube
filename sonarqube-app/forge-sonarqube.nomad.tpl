@@ -117,7 +117,10 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 image   = "${image}:${tag}"
                 ports   = ["http"]
 
-                extra_hosts = ["sonar.db.internal:$\u007BNOMAD_IP_http\u007D"]
+                extra_hosts = [
+                               "sonar.db.internal:$\u007BNOMAD_IP_http\u007D",
+                               "jenkins.internal:$\u007Battr.unique.network.ip-address\u007D"
+                              ]
 
                 mount {
                     type = "volume"
