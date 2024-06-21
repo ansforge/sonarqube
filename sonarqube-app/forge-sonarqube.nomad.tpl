@@ -119,8 +119,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
 
                 extra_hosts = [
                                "sonar.db.internal:$\u007BNOMAD_IP_http\u007D",
-                               "jenkins.internal:$\u007Battr.unique.network.ip-address\u007D",
-                               "gitlab.internal:$\u007Battr.unique.network.ip-address\u007D"
+                               "gitlab.internal jenkins.internal:$\u007Battr.unique.network.ip-address\u007D"
                               ]
 
                 mount {
