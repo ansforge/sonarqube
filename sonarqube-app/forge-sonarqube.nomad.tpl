@@ -117,7 +117,10 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 image   = "${image}:${tag}"
                 ports   = ["http"]
 
-                extra_hosts = ["sonar.db.internal:$\u007BNOMAD_IP_http\u007D"]
+                extra_hosts = [
+                               "sonar.db.internal:$\u007BNOMAD_IP_http\u007D",
+                               "gitlab.internal jenkins.internal:$\u007Battr.unique.network.ip-address\u007D"
+                              ]
 
                 mount {
                     type = "volume"
@@ -209,7 +212,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = [
                         "urlprefix-${qual_fqdn}/",
-                        "urlprefix-${qual_fqdn_vip}/"
+                        "urlprefix-${qual_fqdn_vip}/",
+                        "urlprefix-qual.internal/"
                         ]
                 port = "http"
                 check {
