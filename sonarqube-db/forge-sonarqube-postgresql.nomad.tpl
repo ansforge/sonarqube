@@ -53,8 +53,8 @@ POSTGRES_PASSWORD={{ .Data.data.psql_password }}
             }
             
             resources {
-                cpu    = 600
-                memory = 2048
+                cpu    = 500
+                memory = 1024
             }
             
             service {
