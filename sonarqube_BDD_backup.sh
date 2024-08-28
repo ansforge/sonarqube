@@ -51,10 +51,10 @@ $NOMAD exec -task postgres -job forge-sonarqube-postgresql  pg_dump -F c --dbnam
 DUMP_RESULT=$?
 if [ $DUMP_RESULT -gt 0 ]
 then
-        echo "${TIMESTAMP} sonarqube dump failed with error code : ${DUMP_RESULT}"
+        echo "${TIMESTAMP} Backup sonarqube dump failed with error code : ${DUMP_RESULT}"
         exit 1
 else
-        echo "${TIMESTAMP} sonarqube dump done"
+        echo "${TIMESTAMP} Backup sonarqube dump done"
 fi
 
 # Remove files older than X days
