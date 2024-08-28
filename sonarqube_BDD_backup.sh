@@ -37,7 +37,7 @@ NOMAD=$(which nomad)
 DUMP_FILENAME="backup_sonarqube_bdd_${DATE}.dump"
 
 # Nombre de jours à garder les dossiers (seront effacés après X jours)
-RETENTION=7
+RETENTION=10
 
 # ---- NE RIEN MODIFIER SOUS CETTE LIGNE ------------------------------------------
 #
