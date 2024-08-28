@@ -4,7 +4,7 @@ echo "Démarrage du script de sauvegarde de Sonarqube"
 # Nom du script     : sonarqube_BDD_backup.sh
 # Auteur            : 
 # Date de Création  : 09/05/2023
-# Version           : 0.0.2
+# Version           : 1.0.0
 # Descritpion       : Script permettant la sauvegarde de la BDD de sonarqube
 #
 # Historique des mises à jour :
