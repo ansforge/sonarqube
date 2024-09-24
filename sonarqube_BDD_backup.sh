@@ -4,7 +4,7 @@ echo "Démarrage du script de sauvegarde de Sonarqube"
 # Nom du script     : sonarqube_BDD_backup.sh
 # Auteur            : 
 # Date de Création  : 09/05/2023
-# Version           : 0.0.2
+# Version           : 1.0.0
 # Descritpion       : Script permettant la sauvegarde de la BDD de sonarqube
 #
 # Historique des mises à jour :
@@ -15,7 +15,7 @@ echo "Démarrage du script de sauvegarde de Sonarqube"
 #-----------+--------+-------------+------------------------------------------------------
 #  0.0.2    | 21/09/23 | Y.ETRILLARD      | Ajout -task dans la commande nomad exec
 #-----------+--------+-------------+------------------------------------------------------
-#  0.0.3    | 21/07/24 | M. FAUREL      | Modif urls
+#  1.0.0    | 21/07/24 | M. FAUREL      | Modif urls
 #-----------+--------+-------------+------------------------------------------------------
 #
 ###############################################################################################
@@ -37,7 +37,7 @@ NOMAD=$(which nomad)
 DUMP_FILENAME="backup_sonarqube_bdd_${DATE}.dump"
 
 # Nombre de jours à garder les dossiers (seront effacés après X jours)
-RETENTION=7
+RETENTION=10
 
 # ---- NE RIEN MODIFIER SOUS CETTE LIGNE ------------------------------------------
 #
@@ -51,10 +51,10 @@ $NOMAD exec -task postgres -job forge-sonarqube-postgresql  pg_dump -F c --dbnam
 DUMP_RESULT=$?
 if [ $DUMP_RESULT -gt 0 ]
 then
-        echo "${TIMESTAMP} sonarqube dump failed with error code : ${DUMP_RESULT}"
+        echo "${TIMESTAMP} Backup sonarqube dump failed with error code : ${DUMP_RESULT}"
         exit 1
 else
-        echo "${TIMESTAMP} sonarqube dump done"
+        echo "${TIMESTAMP} Backup sonarqube dump done"
 fi
 
 # Remove files older than X days
