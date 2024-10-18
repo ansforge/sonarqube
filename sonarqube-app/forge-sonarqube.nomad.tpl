@@ -222,8 +222,8 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
       }
 
       resources {
-        cpu    = 2048
-        memory = 5120
+        cpu    = 1024
+        memory = 4096
       }
 
       service {
