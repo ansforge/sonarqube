@@ -46,19 +46,19 @@ RETENTION=10
 mkdir -p $BACKUP_DIR/$DATE
 
 # Dump sonarqube bdd
-echo "$(date +"%Y-%m-%d %H:%M:%S") starting Sonarqube dump..."
+echo "$(date +"%Y-%m-%d %H:%M:%S") starting Sonarqube dump..." >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
 $NOMAD exec -task postgres -job forge-sonarqube-postgresql  pg_dump -F c --dbname=postgresql://sonar@localhost/sonar > $BACKUP_DIR/$DATE/$DUMP_FILENAME
 
 DUMP_RESULT=$?
 if [ $DUMP_RESULT -gt 0 ]
 then
-        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump failed with error code : ${DUMP_RESULT}"
+        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump failed with error code : ${DUMP_RESULT}" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
         exit 1
 else
-        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump done"
+        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump done" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
 fi
 
 # Remove files older than X days
 find $BACKUP_DIR/* -mtime +$RETENTION -exec rm -rf {} \;
 
-echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube finished"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube finished" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
