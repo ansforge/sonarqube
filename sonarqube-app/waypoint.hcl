@@ -63,5 +63,5 @@ variable "qual_fqdn_vip" {
 
 variable "repo_url" {
     type    = string
-    default = "http://repo.proxy-prod-forge.asip.hst.fluxus.net"
+    default = "https://repo.proxy.prod.forge.esante.gouv.fr"
 }
