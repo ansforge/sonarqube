@@ -17,6 +17,8 @@ echo "Démarrage du script de sauvegarde de Sonarqube"
 #-----------+--------+-------------+------------------------------------------------------
 #  1.0.0    | 21/07/24 | M. FAUREL      | Modif urls
 #-----------+--------+-------------+------------------------------------------------------
+#  1.0.1    | 06/11/24 | M. FAUREL   | Modification du timestamp
+#-----------+--------+-------------+------------------------------------------------------
 #
 ###############################################################################################
 
@@ -24,7 +26,6 @@ echo "Démarrage du script de sauvegarde de Sonarqube"
 
 # Configuration de base: datestamp e.g. YYYYMMDD
 DATE=$(date +"%Y%m%d")
-TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Dossier où sauvegarder les backups
 BACKUP_DIR="/var/backup/sonarqube_bdd"
@@ -45,19 +46,19 @@ RETENTION=10
 mkdir -p $BACKUP_DIR/$DATE
 
 # Dump sonarqube bdd
-echo "${TIMESTAMP} starting Sonarqube dump..."
+echo "$(date +"%Y-%m-%d %H:%M:%S") starting Sonarqube dump..." >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
 $NOMAD exec -task postgres -job forge-sonarqube-postgresql  pg_dump -F c --dbname=postgresql://sonar@localhost/sonar > $BACKUP_DIR/$DATE/$DUMP_FILENAME
 
 DUMP_RESULT=$?
 if [ $DUMP_RESULT -gt 0 ]
 then
-        echo "${TIMESTAMP} Backup sonarqube dump failed with error code : ${DUMP_RESULT}"
+        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump failed with error code : ${DUMP_RESULT}" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
         exit 1
 else
-        echo "${TIMESTAMP} Backup sonarqube dump done"
+        echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube dump done" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
 fi
 
 # Remove files older than X days
 find $BACKUP_DIR/* -mtime +$RETENTION -exec rm -rf {} \;
 
-echo "${TIMESTAMP} Backup sonarqube finished"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Backup sonarqube finished" >> $BACKUP_DIR/sonarqube_bdd_backup-cron-`date +\%F`.log
