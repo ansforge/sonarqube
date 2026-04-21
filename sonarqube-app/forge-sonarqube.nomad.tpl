@@ -36,31 +36,31 @@ job "forge-sonarqube" {
 
       # Ajout de plugins
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
+        source = "${repo_url}/artifactory/ext-tools/com/example/sonarqube-plugins/sonar-dependency-check-plugin-3.0.1.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/checkstyle-sonar-plugin-10.8.1.jar"
+        source = "${repo_url}/artifactory/ext-tools/com/example/sonarqube-plugins/checkstyle-sonar-plugin-10.8.1.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-findbugs-plugin-4.2.3.jar"
+        source = "${repo_url}/artifactory/ext-tools/com/example/sonarqube-plugins/sonar-findbugs-plugin-4.2.3.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
+        source = "${repo_url}/artifactory/ext-tools/com/example/sonarqube-plugins/sonar-groovy-plugin-1.8.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/qualimetrie/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
+        source = "${repo_url}/artifactory/ext-tools/com/example/sonarqube-plugins/sonar-pmd-plugin-3.4.0.jar"
         options {
           archive = false
         }
