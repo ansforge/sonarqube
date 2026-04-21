@@ -43,7 +43,7 @@ variable "datacenter" {
 
 variable "image" {
     type    = string
-    default = "sonarqube"
+    default = "614q518g.gra7.container-registry.ovh.net/sonarqube"
 }
 
 variable "tag" {
