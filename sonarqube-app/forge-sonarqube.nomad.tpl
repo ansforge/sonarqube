@@ -162,7 +162,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         mount {
           type   = "bind"
           target = "/opt/sonarqube/extensions/plugins/sonar-dependency-check-plugin-3.0.1.jar"
-          source = "local/sonar-dependency-check-plugin-3.0.1.jar"
+          source = "local/sonar-dependency-check-plugin-3.0.1-1.0.0.jar"
           bind_options {
             propagation = "rshared"
           }
@@ -170,7 +170,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         mount {
           type   = "bind"
           target = "/opt/sonarqube/extensions/plugins/checkstyle-sonar-plugin-10.8.1.jar"
-          source = "local/checkstyle-sonar-plugin-10.8.1.jar"
+          source = "local/checkstyle-sonar-plugin-10.8.1-1.0.0.jar"
           bind_options {
             propagation = "rshared"
           }
@@ -178,7 +178,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         mount {
           type   = "bind"
           target = "/opt/sonarqube/extensions/plugins/sonar-findbugs-plugin-4.2.3.jar"
-          source = "local/sonar-findbugs-plugin-4.2.3.jar"
+          source = "local/sonar-findbugs-plugin-4.2.3-1.0.0.jar"
           bind_options {
             propagation = "rshared"
           }
@@ -186,7 +186,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         mount {
           type   = "bind"
           target = "/opt/sonarqube/extensions/plugins/sonar-groovy-plugin-1.8.jar"
-          source = "local/sonar-groovy-plugin-1.8.jar"
+          source = "local/sonar-groovy-plugin-1.8-1.0.0.jar"
           bind_options {
             propagation = "rshared"
           }
@@ -194,7 +194,7 @@ LDAP_GROUP_REQUEST=(&(objectClass=posixGroup)(memberUid={uid}))
         mount {
           type   = "bind"
           target = "/opt/sonarqube/extensions/plugins/sonar-pmd-plugin-3.4.0.jar"
-          source = "local/sonar-pmd-plugin-3.4.0.jar"
+          source = "local/sonar-pmd-plugin-3.4.0-1.0.0.jar"
           bind_options {
             propagation = "rshared"
           }
