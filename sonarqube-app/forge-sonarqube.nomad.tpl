@@ -36,38 +36,38 @@ job "forge-sonarqube" {
 
       # Ajout de plugins
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/com/example/sonar-dependency-check-plugin-3.0.1/1.0.0/sonar-dependency-check-plugin-3.0.1-1.0.0.jar"
+        source = "${repo_url}/repository/ext-tools/com/example/sonar-dependency-check-plugin-3.0.1/1.0.0/sonar-dependency-check-plugin-3.0.1-1.0.0.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/com/example/checkstyle-sonar-plugin-10.8.1/1.0.0/checkstyle-sonar-plugin-10.8.1-1.0.0.jar"
+        source = "${repo_url}/repository/ext-tools/com/example/checkstyle-sonar-plugin-10.8.1/1.0.0/checkstyle-sonar-plugin-10.8.1-1.0.0.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/com/example/sonar-findbugs-plugin-4.2.3/1.0.0/sonar-findbugs-plugin-4.2.3-1.0.0.jar"
+        source = "${repo_url}/repository/ext-tools/com/example/sonar-findbugs-plugin-4.2.3/1.0.0/sonar-findbugs-plugin-4.2.3-1.0.0.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/com/example/sonar-groovy-plugin-1.8/1.0.0/sonar-groovy-plugin-1.8-1.0.0.jar"
+        source = "${repo_url}/repository/ext-tools/com/example/sonar-groovy-plugin-1.8/1.0.0/sonar-groovy-plugin-1.8-1.0.0.jar"
         options {
           archive = false
         }
       }
       artifact {
-        source = "${repo_url}/artifactory/ext-tools/com/example/sonar-pmd-plugin-3.4.0/1.0.0/sonar-pmd-plugin-3.4.0-1.0.0.jar"
+        source = "${repo_url}/repository/ext-tools/com/example/sonar-pmd-plugin-3.4.0/1.0.0/sonar-pmd-plugin-3.4.0-1.0.0.jar"
         options {
           archive = false
         }
       }
       # Trustore java
       artifact {
-        source = "${repo_url}/artifactory/asip-ac/truststore/cacerts"
+        source = "${repo_url}/repository/asip-ac/truststore/cacerts"
         options {
           archive = false
         }
